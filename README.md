@@ -2,7 +2,7 @@
 
 **Due Tuesday Feb 5 before class**
 
-We're gonna make a shitty Twitter.
+We're gonna make a Twitter clone.
 
 ## Reading
 
