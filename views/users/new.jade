@@ -1,0 +1,10 @@
+extends ../layout
+
+block content
+    h1= title
+    form(method='POST', action='/users/new')
+        div
+            label(for='username')
+                | Enter your username. If the username isn't recognized, a new account will be created.
+        input(type='text', name='username', id='username', placeholder='username')
+        input(type='submit')
