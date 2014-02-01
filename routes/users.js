@@ -7,36 +7,40 @@ module.exports = function(models){
 	};
 
 	// POST /users/new
-	// TODO: remove terrible callback nesting
 	fn.postNew = function(req, res) {
 		var un = req.body.username;
 
-		if (!req.session.username) {
-			models.User.findOne({ username: un }).exec(function(err, result){
-				if (err) {
-					res.send(500, { status : 'error' });
-					console.log('Error finding user ' + un + '\n' + err);
+		var lookupUser = function(err, result) {
+			if (err) {
+				res.send(500, { status : 'error' });
+				console.log('Error finding user ' + un + '\n' + err);
+			} else {
+				if (result) {
+					req.session.username = result.username;
+					res.redirect('/');
 				} else {
-					if (result) {
-						req.session.username = result.username;
-						res.redirect('/');
-					} else {
-						var user = new models.User({
-							username: un, // TODO: validation
-							_tweets: []
-						});
-						user.save(function(err){
-							if (err) {
-								res.send(500, { status : 'error' })
-							} else {
-								req.session.username = un;
-								res.redirect('/');
-							}
-						});		
-					}
+					var user = new models.User({
+						username: un, // TODO: validation
+						_tweets: []
+					});
+					user.save(saveUser);		
 				}
-			});
+			}
+		};
+
+		var saveUser = function(err){
+			if (err) {
+				res.send(500, { status : 'error' })
+			} else {
+				req.session.username = un;
+				res.redirect('/');
+			}
+		};
+
+		if (!req.session.username || un !== req.session.username) {
+			models.User.findOne({ username: un }).exec(lookupUser);
 		} else {
+			// already logged in as this user
 			res.redirect('/');
 		}
 	};
