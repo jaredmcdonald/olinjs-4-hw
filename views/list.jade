@@ -4,14 +4,16 @@ block content
 	h1= title
 	section.user-details
 		if (username)
-			| Welcome, #{username}
+			| Welcome, #{username} 
+			a(href='/users/new')
+				| (Change users)
 		else
 			a(href='/users/new')
 				| Log in / Register
 	if (username)
 		section.create-tweet
 			form#createTweet(method='POST', action='/tweet/#{username}', data-userid='#{userId}')
-				textarea(max='140', name='tweetContent', id='tweetContent', placeholder='Tweet (140 characters max)')
+				textarea(maxlength='140', name='tweetContent', id='tweetContent', placeholder='Tweet (140 characters max)')
 				input(type='submit')
 	script(src='/js/twit.js')
 
