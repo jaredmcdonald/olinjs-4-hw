@@ -3,7 +3,7 @@ module.exports = function(models) {
 
 	// GET /users/new
 	fn.new = function(req, res) {
-		res.render('users/new', { title: 'Log In' });
+		res.render('users/new', { title: 'Tweeter Login' });
 	};
 
 	// POST /users/new

@@ -8,7 +8,7 @@ module.exports = function(models){
 				console.log(err);
 			} else {
 				res.render('list', {
-					title: 'All Tweets',
+					title: 'Tweeter',
 					username: req.session.username || null,
 					userId: req.session.userId || null,
 					tweets: tweets
