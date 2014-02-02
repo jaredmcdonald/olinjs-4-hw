@@ -16,11 +16,12 @@ var Twit = (function(){
 	};
 
 	var tweetError = function(err) {
-
+		alert('Such Error ;(');
 	};
 
 	var tweetSuccess = function(data) {
-
+		$('#tweetContent').val('');
+		$('#tweetContainer > ul').prepend(data);
 	};
 
 	return {

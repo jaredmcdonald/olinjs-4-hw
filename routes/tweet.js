@@ -21,14 +21,11 @@ module.exports = function(models) {
 					}
 				}).exec(associationCallback);
 
-				res.send(200, {
-					status: 'success',
-					tweet: {
-						content: newTweet.content,
-						timestamp: newTweet.timestamp,
-						formattedDate: newTweet.formattedDate,
-						formattedTime: newTweet.formattedTime
-					}
+				// hack: set username from session
+				if (!newTweet._creator.username) newTweet._creator.username = req.session.username;
+
+				res.render('include/_tweet-list', {
+					tweets: [ newTweet ]
 				});
 			}
 		};

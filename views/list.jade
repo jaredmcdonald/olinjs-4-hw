@@ -15,5 +15,6 @@ block content
 				input(type='submit')
 	script(src='/js/twit.js')
 
-	section.tweet-container
-		include include/_tweet-list
+	section#tweetContainer.tweet-container
+		ul.tweets
+			include include/_tweet-list
