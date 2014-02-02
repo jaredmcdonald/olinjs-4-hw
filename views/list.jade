@@ -1,5 +1,19 @@
 extends layout
 
 block content
-    h1= title
-    h2= username
+	h1= title
+	section.user-details
+		if (username)
+			| Welcome, #{username}
+		else
+			a(href='/users/new')
+				| Log in / Register
+	if (username)
+		section.create-tweet
+			form#createTweet(method='POST', action='/tweet/#{username}', data-userid='#{userId}')
+				textarea(max='140', name='tweetContent', id='tweetContent', placeholder='Tweet (140 characters max)')
+				input(type='submit')
+	script(src='/js/twit.js')
+
+	//- section.tweet-container
+	//- 	include include/_tweet-list

@@ -1,4 +1,4 @@
-module.exports = function(models){
+module.exports = function(models) {
 	var fn = {};
 
 	// GET /users/new
@@ -17,6 +17,7 @@ module.exports = function(models){
 			} else {
 				if (result) {
 					req.session.username = result.username;
+					req.session.userId = result._id;
 					res.redirect('/');
 				} else {
 					var user = new models.User({
@@ -28,11 +29,13 @@ module.exports = function(models){
 			}
 		};
 
-		var saveUser = function(err){
+		var saveUser = function(err, newUser) {
 			if (err) {
-				res.send(500, { status : 'error' })
+				res.send(500, { status : 'error' });
+				console.log('Error saving user' + un + '\n' + err);
 			} else {
 				req.session.username = un;
+				req.session.userId = newUser._id;
 				res.redirect('/');
 			}
 		};

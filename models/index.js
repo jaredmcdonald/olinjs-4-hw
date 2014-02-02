@@ -11,6 +11,8 @@ module.exports = function(mongoose) {
 	// models.Tweet
 	var tweetSchema = mongoose.Schema({
 		timestamp: Number,
+		formattedDate: String,
+		formattedTime: String,
 		content: String,
 		_creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 	});

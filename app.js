@@ -9,6 +9,7 @@ var express = require('express')
 ,   mongoose = require('mongoose')
 ,	models = require('./models')(mongoose)
 ,   users = require('./routes/users')(models)
+,   tweet = require('./routes/tweet')(models)
 ,   list = require('./routes/list')(models)
 ,   app = express();
 
@@ -35,7 +36,7 @@ if ('development' == app.get('env')) {
 app.get('/', list.index);
 app.get('/users/new', users.new);
 app.post('/users/new', users.postNew);
-// app.post('/tweets/:user', noop);
+app.post('/tweet/:username', tweet);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

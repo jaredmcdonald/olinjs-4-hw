@@ -1,0 +1,6 @@
+ul.tweets
+	each tweet, i in tweets
+		li.tweet
+			p.tweet-author= tweet._creator.username
+			p.tweet-timestamp= 'posted at: ' + tweet.timestamp
+			p.tweet-content= tweet.content
