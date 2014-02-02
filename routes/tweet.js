@@ -37,7 +37,7 @@ module.exports = function(models) {
 			var now = new Date(),
 				tweet = new models.Tweet({
 					content: req.body.content,
-					timestamp: now.value,
+					timestamp: now.getTime(),
 					formattedDate: now.toDateString(),
 					formattedTime: now.toTimeString(),
 					_creator: req.session.userId
