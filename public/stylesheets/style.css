@@ -13,3 +13,7 @@ a {
 	width: 130px;
 	height: 75px;
 }
+
+.hide {
+	display: none;
+}

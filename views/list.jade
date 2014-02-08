@@ -15,6 +15,9 @@ block content
 			form#createTweet(method='POST', action='/tweet/#{username}', data-userid='#{userId}')
 				textarea(maxlength='140', name='tweetContent', id='tweetContent', placeholder='Tweet (140 characters max)')
 				input(type='submit')
+
+	button#showNewTweets.show-new-tweets.hide
+		| Show New Tweets
 	script(src='/js/twit.js')
 
 	section#tweetContainer.tweet-container

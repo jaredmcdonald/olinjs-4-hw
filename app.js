@@ -34,6 +34,7 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', list.index);
+app.get('/tweets', list.getTweetsPartial);
 app.get('/users/new', users.new);
 app.post('/users/new', users.postNew);
 app.post('/tweet/:username', tweet);

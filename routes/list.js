@@ -23,5 +23,23 @@ module.exports = function(models){
 
 	};
 
+	fn.getTweetsPartial = function(req, res) {
+		var renderTweets = function(err, tweets) {
+			if (err) {
+				res.send(500, { status: 'error' });
+				console.log(err);
+			} else {
+				res.render('include/_tweet-list', {
+					tweets: tweets
+				});			
+			}
+		};
+
+		models.Tweet.find()
+			.sort('-timestamp')
+			.populate('_creator')
+			.exec(renderTweets);
+	};
+
 	return fn;
 };
