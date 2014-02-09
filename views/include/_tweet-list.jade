@@ -1,5 +1,6 @@
 each tweet, i in tweets
+	- var date = new Date(tweet.timestamp);
 	li.tweet
 		p.tweet-author= tweet._creator.username
-		p.tweet-timestamp= 'posted at: ' + tweet.formattedDate + ' ' + tweet.formattedTime
+		p.tweet-timestamp= 'posted at: ' + date.toLocaleDateString() + ' ' + date.toLocaleTimeString()
 		p.tweet-content= tweet.content
