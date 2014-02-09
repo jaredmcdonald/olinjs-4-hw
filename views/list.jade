@@ -18,8 +18,13 @@ block content
 
 	button#showNewTweets.show-new-tweets.hide
 		| Show New Tweets
-	script(src='/js/twit.js')
+
+	section#errorMsg.hide
 
 	section#tweetContainer.tweet-container
 		ul.tweets
 			include include/_tweet-list
+
+block js
+	script(src='//code.jquery.com/jquery-1.10.2.min.js')
+	script(src='/js/twit.js')

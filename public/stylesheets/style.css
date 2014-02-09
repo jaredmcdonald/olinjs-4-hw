@@ -17,3 +17,7 @@ a {
 .hide {
 	display: none;
 }
+
+#errorMsg {
+	color: red;
+}

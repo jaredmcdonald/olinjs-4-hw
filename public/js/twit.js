@@ -1,6 +1,7 @@
 var Twit = (function(){
 
-	var tweetsHTML;
+	var tweetsHTML,
+		$errorMsg = $('#errorMsg');
 
 	var watchTweetForm = function() {
 		$('#createTweet').on('submit', postTweet);
@@ -13,17 +14,18 @@ var Twit = (function(){
 			content: $this.children('textarea').val(),
 			userId: $this.attr('data-userid')
 		})
-			.error(tweetError)
+			.error(tweetErrorPost)
 		 	.success(tweetSuccess);
 	};
 
-	var tweetError = function(err) {
-		alert('Such Error ;(');
+	var tweetErrorPost = function(err) {
+		$errorMsg.text('wow error uh oh problem posting tweet ;(').removeClass('hide');
 	};
 
 	var tweetSuccess = function(data) {
 		$('#tweetContent').val('');
 		$('#tweetContainer > ul').prepend(data);
+		$errorMsg.empty().addClass('hide');
 	};
 
 	var pollTweets = function(){
@@ -32,8 +34,12 @@ var Twit = (function(){
 
 	var getTweets = function(){
 		$.get('/tweets')
-			.error(tweetError)
+			.error(tweetErrorGet)
 			.success(tweetUpdater);
+	};
+
+	var tweetErrorGet = function(err) {
+		$('#errorMsg').text('such error uh oh problem getting new tweetz ;(').removeClass('hide');
 	};
 
 	var tweetUpdater = function(html) {
@@ -41,6 +47,7 @@ var Twit = (function(){
 			tweetsHTML = html;
 			$('#showNewTweets').removeClass('hide');
 		}
+		$errorMsg.empty().addClass('hide');
 	};
 
 	var showNewTweetsHandler = function() {
